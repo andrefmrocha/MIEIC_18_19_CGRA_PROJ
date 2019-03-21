@@ -69,6 +69,8 @@ class MyScene extends CGFscene {
 
         if(this.displayNormals)
             this.prism.enableNormalViz();
+        else
+            this.prism.disableNormalViz();
             
         //Apply default appearance
         this.setDefaultAppearance();

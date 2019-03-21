@@ -18,7 +18,7 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'displayAxis').name("Display axis");
 
-        this.gui.add(this.scene, 'objectComplexity', 0.01, 1.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
+        this.gui.add(this.scene, 'objectComplexity', 0.01, 50.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
         
         this.gui
           .add(this.scene, "displayNormals")
