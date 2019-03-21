@@ -41,7 +41,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     updateObjectComplexity(){
-        this.prism.updateBuffers(this.objectComplexity);
+        this.cylinder.updateBuffers(this.objectComplexity);
     }
 
     initCameras() {
@@ -69,9 +69,9 @@ class MyScene extends CGFscene {
             this.axis.display();
 
         if(this.displayNormals)
-            this.prism.enableNormalViz();
+            this.cylinder.enableNormalViz();
         else
-            this.prism.disableNormalViz();
+            this.cylinder.disableNormalViz();
             
         //Apply default appearance
         this.setDefaultAppearance();
