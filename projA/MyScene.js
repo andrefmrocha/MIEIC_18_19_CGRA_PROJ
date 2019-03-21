@@ -30,7 +30,12 @@ class MyScene extends CGFscene {
 
 
         //Objects connected to MyInterface
+
         this.forest = new MyTreeRowPatch(this);
+        this.prism = new MyPrism(this,3,2,3);
+        this.cylinder = new MyCylinder(this,50,2,3);
+        this.house = new MyHouse(this);
+
 
     }
     initLights() {
@@ -80,6 +85,7 @@ class MyScene extends CGFscene {
         //this.prism.display();
         this.forest.display();
 
+        this.house.display();
         // ---- END Primitive drawing section
     }
 }
