@@ -18,24 +18,32 @@ class MyCylinder extends CGFobject {
         var ang = 0;
         var alphaAng = 2*Math.PI/this.slices;
 
+        var sa = this.radius * Math.sin(ang);
+        var ca= this.radius * Math.cos(ang);
+
+        this.vertices.push(ca, 0 , sa );
+        this.vertices.push(ca, this.height , sa );
+
+        this.normals.push(ca,0,sa);
+        this.normals.push(ca,0,sa);
+
+        ang+=alphaAng;
+
+
         for(var i = 0; i < this.slices; i++){
-            var sa = this.radius * Math.sin(ang);
-            var saa = this.radius * Math.sin(ang+alphaAng);
-            var ca= this.radius * Math.cos(ang);
-            var caa= this.radius * Math.cos(ang+alphaAng);
+
+            sa = this.radius * Math.sin(ang);
+            ca= this.radius * Math.cos(ang);
 
             this.vertices.push(ca, 0 , sa );
-            this.vertices.push(caa, 0 , saa );
             this.vertices.push(ca, this.height , sa );
-            this.vertices.push(caa, this.height , saa );
 
             this.normals.push(ca,0,sa);
             this.normals.push(ca,0,sa);
-            this.normals.push(ca,0,sa);
-            this.normals.push(ca,0,sa);
 
-            this.indices.push( 4*i+2 , 4*i+1 , 4*i );
-            this.indices.push( 4*i+2 , 4*i+3 , 4*i+1 );
+
+            this.indices.push( 2*i+1 , 2*i+2 , 2*i );
+            this.indices.push( 2*i+2 , 2*i+3 , 2*i+1 );
 
             ang+=alphaAng;
         }
