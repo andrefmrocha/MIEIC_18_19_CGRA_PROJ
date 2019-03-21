@@ -30,8 +30,7 @@ class MyScene extends CGFscene {
 
 
         //Objects connected to MyInterface
-        this.prism = new MyPrism(this,3,2,3);
-        this.cylinder = new MyCylinder(this,50,2,3);
+        this.forest = new MyTreeRowPatch(this);
 
     }
     initLights() {
@@ -67,19 +66,19 @@ class MyScene extends CGFscene {
         // Draw axis
         if(this.displayAxis)
             this.axis.display();
-
+/*
         if(this.displayNormals)
             this.cylinder.enableNormalViz();
         else
             this.cylinder.disableNormalViz();
-            
+*/
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
         //this.prism.display();
-        this.cylinder.display();
+        this.forest.display();
 
         // ---- END Primitive drawing section
     }
