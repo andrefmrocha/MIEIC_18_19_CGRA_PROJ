@@ -11,6 +11,9 @@ class MyCylinder extends CGFobject {
         this.initBuffers();
     }
     initBuffers() {
+
+        this.texCoords = [];
+
         this.vertices = [];
         this.indices = [];
         this.normals = [];
@@ -44,6 +47,8 @@ class MyCylinder extends CGFobject {
 
             this.indices.push( 2*i+1 , 2*i+2 , 2*i );
             this.indices.push( 2*i+2 , 2*i+3 , 2*i+1 );
+
+            this.texCoords.push(i/this.slices , 1 , (i+1)/this.slices , 1 , (i+1)/this.slices , 0 , (i)/this.slices , 0 );
 
             ang+=alphaAng;
         }

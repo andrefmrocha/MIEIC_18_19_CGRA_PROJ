@@ -19,6 +19,8 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
+        this.enableTextures(true);
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
@@ -28,10 +30,27 @@ class MyScene extends CGFscene {
         this.objectComplexity = 0.5;
         this.displayNormals = false;
 
+        // Textures
+        //this.wood = new CGFtexture(this, 'images/wood.jpg');
+
+        this.materialWood = new CGFappearance(this);
+        this.materialWood.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialWood.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialWood.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialWood.setShininess(10.0);
+        this.materialWood.loadTexture('images/wood.jpg');
+
+        this.materialTreeTop = new CGFappearance(this);
+        this.materialTreeTop.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialTreeTop.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialTreeTop.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialTreeTop.setShininess(10.0);
+        this.materialTreeTop.loadTexture('images/treetop.jpg');
+
 
         //Objects connected to MyInterface
 
-        this.forest = new MyTreeRowPatch(this);
+        this.forest = new MyTreeGroupPatch(this);
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this);
@@ -85,7 +104,7 @@ class MyScene extends CGFscene {
         //this.prism.display();
         this.forest.display();
 
-        this.house.display();
+        //this.house.display();
         // ---- END Primitive drawing section
     }
 }
