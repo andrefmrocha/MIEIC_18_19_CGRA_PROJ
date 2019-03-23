@@ -6,7 +6,6 @@ class MyUnitCubeQuad extends CGFobject{
     display(){
         this.scene.pushMatrix();
         this.scene.translate(0, 1, 0);
-        this.scene.scale(2, 2, 2);
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
         this.quad.display();

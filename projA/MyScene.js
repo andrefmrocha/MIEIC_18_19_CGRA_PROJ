@@ -54,7 +54,7 @@ class MyScene extends CGFscene {
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this);
-
+        this.hill = new MyVoxelHill(this, 4);
 
     }
     initLights() {
@@ -105,7 +105,8 @@ class MyScene extends CGFscene {
         // this.forest.display();
 
         this.scale(0.6, 0.6, 0.6)
-        this.house.display();
+        // this.house.display();
+        this.hill.display();
         // ---- END Primitive drawing section
     }
 }
