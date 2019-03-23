@@ -102,9 +102,10 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         //this.prism.display();
-        this.forest.display();
+        // this.forest.display();
 
-        //this.house.display();
+        this.scale(0.6, 0.6, 0.6)
+        this.house.display();
         // ---- END Primitive drawing section
     }
 }
