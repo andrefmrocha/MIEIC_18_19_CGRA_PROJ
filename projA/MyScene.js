@@ -33,6 +33,10 @@ class MyScene extends CGFscene {
         // Textures
         //this.wood = new CGFtexture(this, 'images/wood.jpg');
 
+        this.textureMineSide = new CGFtexture(this, 'images/mineSide.png');
+        this.textureMineTop = new CGFtexture(this, 'images/mineTop.png');
+        this.textureMineBottom = new CGFtexture(this, 'images/mineBottom.png');
+
         this.materialWood = new CGFappearance(this);
         this.materialWood.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialWood.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -67,6 +71,31 @@ class MyScene extends CGFscene {
         this.tiles.setSpecular(0.1, 0.1, 0.1, 1);
         this.tiles.setShininess(10.0);
         this.tiles.loadTexture('images/tiles.jpg');
+
+
+        this.materialMineSide = new CGFappearance(this);
+        this.materialMineSide.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialMineSide.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialMineSide.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialMineSide.setShininess(10.0);
+        this.materialMineSide.setTexture(this.textureMineSide);
+
+        //-------
+        
+        this.materialMineTop = new CGFappearance(this);
+        this.materialMineTop.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialMineTop.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialMineTop.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialMineTop.setShininess(10.0);
+        this.materialMineTop.setTexture(this.textureMineTop);
+
+        //-------
+        this.materialMineBottom = new CGFappearance(this);
+        this.materialMineBottom.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialMineBottom.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialMineBottom.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialMineBottom.setShininess(10.0);
+        this.materialMineBottom.setTexture(this.textureMineBottom);
 
 
         //Objects connected to MyInterface

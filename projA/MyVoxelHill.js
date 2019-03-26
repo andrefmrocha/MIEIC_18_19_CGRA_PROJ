@@ -7,6 +7,8 @@ class MyVoxelHill extends CGFobject{
 
     display(){
         this.scene.pushMatrix();
+        this.scene.materialMineTop.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         //Multiplos de 8
         //3, 5, 7...
         //1, 3, 5
