@@ -74,8 +74,8 @@ class MyScene extends CGFscene {
 
         this.water = new CGFappearance(this);
         this.water.setAmbient(0.1, 0.1, 0.1, 1);
-        this.water.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.water.setSpecular(0.1, 0.1, 0.1, 1);
+        this.water.setDiffuse(0.3, 0.3, 0.3, 1);
+        this.water.setSpecular(0.9, 0.9, 0.9, 1);
         this.water.setShininess(10.0);
         this.water.loadTexture('images/water.jpg');
 
