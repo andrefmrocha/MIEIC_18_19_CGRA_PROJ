@@ -61,13 +61,20 @@ class MyScene extends CGFscene {
         this.door.setShininess(10.0);
         this.door.loadTexture('images/door.jpg');
 
+        this.tiles = new CGFappearance(this);
+        this.tiles.setAmbient(0.1, 0.1, 0.1, 1);
+        this.tiles.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tiles.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tiles.setShininess(10.0);
+        this.tiles.loadTexture('images/tiles.jpg');
+
 
         //Objects connected to MyInterface
 
         this.forest = new MyTreeGroupPatch(this);
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
-        this.house = new MyHouse(this, this.brick, this.door);
+        this.house = new MyHouse(this, this.brick, this.door, this.tiles);
         this.hill = new MyVoxelHill(this, 4);
 
     }

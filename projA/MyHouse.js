@@ -1,8 +1,9 @@
 class MyHouse extends CGFobject{
-    constructor(scene, brickTexture, doorTexture){
+    constructor(scene, brickTexture, doorTexture, tilesTexture){
         super(scene);
         this.brickTexture = brickTexture;
         this.doorTexture = doorTexture;
+        this.tilesTexture = tilesTexture;
         this.cylinder = new MyCylinder(scene, 6, 0.3, 2);
         this.cube = new MyUnitCubeQuad(scene);
         this.roof = new MyPyramid(scene, 4, 0);
@@ -28,8 +29,8 @@ class MyHouse extends CGFobject{
                 
         //Chimney
         this.scene.pushMatrix();
-        this.scene.translate(1.7, 5.5, 0);
-        this.scene.scale(0.7, 0.7, 0.7);
+        this.scene.translate(1.7, 5.95, 0);
+        this.scene.scale(0.7, 0.5, 0.7);
         this.cylinder.display();
         this.scene.popMatrix();
         
@@ -53,7 +54,7 @@ class MyHouse extends CGFobject{
 
         // Door
         this.scene.pushMatrix();
-        this.scene.translate(1, -0.39, 0.1);
+        this.scene.translate(1, -0.39, 0.01);
         this.scene.scale(0.5, 0.8, 1);
         this.doorTexture.apply();
         this.cube.display();
@@ -73,6 +74,7 @@ class MyHouse extends CGFobject{
         this.scene.translate(0, 5.5, 0);
         this.scene.rotate(Math.PI/4, 0, 1, 0);
         this.scene.scale(3, 3, 3);
+        this.tilesTexture.apply();
         this.roof.display();
         this.scene.popMatrix();
         
