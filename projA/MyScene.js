@@ -72,6 +72,13 @@ class MyScene extends CGFscene {
         this.tiles.setShininess(10.0);
         this.tiles.loadTexture('images/tiles.jpg');
 
+        this.water = new CGFappearance(this);
+        this.water.setAmbient(0.1, 0.1, 0.1, 1);
+        this.water.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.water.setSpecular(0.1, 0.1, 0.1, 1);
+        this.water.setShininess(10.0);
+        this.water.loadTexture('images/water.jpg');
+
 
         this.materialMineSide = new CGFappearance(this);
         this.materialMineSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -98,6 +105,8 @@ class MyScene extends CGFscene {
         this.materialMineBottom.setTexture(this.textureMineBottom);
 
 
+
+
         //Objects connected to MyInterface
 
         this.forest = new MyTreeGroupPatch(this);
@@ -105,7 +114,7 @@ class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
         this.hill = new MyVoxelHill(this, 4);
-
+        this.pool = new MyPool(this, 4, 10);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -155,8 +164,9 @@ class MyScene extends CGFscene {
         // this.forest.display();
 
         this.scale(0.6, 0.6, 0.6)
-        this.house.display();
+        // this.house.display();
         // this.hill.display();
+        this.pool.display();
         // ---- END Primitive drawing section
     }
 }
