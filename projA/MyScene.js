@@ -33,6 +33,13 @@ class MyScene extends CGFscene {
         // Textures
         //this.wood = new CGFtexture(this, 'images/wood.jpg');
 
+        this.materialDiffuse = new CGFappearance(this);
+        this.materialDiffuse.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialDiffuse.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialDiffuse.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialDiffuse.setShininess(10.0);
+
+
         this.materialWood = new CGFappearance(this);
         this.materialWood.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialWood.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -47,14 +54,58 @@ class MyScene extends CGFscene {
         this.materialTreeTop.setShininess(10.0);
         this.materialTreeTop.loadTexture('images/treetop.jpg');
 
+        this.materialHillsBk = new CGFappearance(this);
+        this.materialHillsBk.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialHillsBk.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialHillsBk.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialHillsBk.setShininess(10.0);
+        this.materialHillsBk.loadTexture('images/skybox/hills_bk.jpg');
+
+        this.materialHillsFt = new CGFappearance(this);
+        this.materialHillsFt.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialHillsFt.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialHillsFt.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialHillsFt.setShininess(10.0);
+        this.materialHillsFt.loadTexture('images/skybox/hills_ft.jpg');
+
+        this.materialHillsLf = new CGFappearance(this);
+        this.materialHillsLf.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialHillsLf.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialHillsLf.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialHillsLf.setShininess(10.0);
+        this.materialHillsLf.loadTexture('images/skybox/hills_lf.jpg');
+
+        this.materialHillsRf = new CGFappearance(this);
+        this.materialHillsRf.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialHillsRf.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialHillsRf.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialHillsRf.setShininess(10.0);
+        this.materialHillsRf.loadTexture('images/skybox/hills_rt.jpg');
+
+        this.materialHillsUp = new CGFappearance(this);
+        this.materialHillsUp.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialHillsUp.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialHillsUp.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialHillsUp.setShininess(10.0);
+        this.materialHillsUp.loadTexture('images/skybox/hills_up.jpg');
+
+        this.materialHillsDn = new CGFappearance(this);
+        this.materialHillsDn.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialHillsDn.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialHillsDn.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialHillsDn.setShininess(10.0);
+        this.materialHillsDn.loadTexture('images/skybox/hills_dn.jpg');
+
 
         //Objects connected to MyInterface
 
-        this.forest = new MyTreeGroupPatch(this);
+        //this.forest = new MyTreeGroupPatch(this);
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this);
         this.hill = new MyVoxelHill(this, 4);
+
+        this.cubemap = new MyCubeMap(this,100);
 
     }
     initLights() {
@@ -101,11 +152,14 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        this.cubemap.display();
+
+
         //this.prism.display();
         // this.forest.display();
 
         this.scale(0.6, 0.6, 0.6)
-        this.house.display();
+        //this.house.display();
         // this.hill.display();
         // ---- END Primitive drawing section
     }
