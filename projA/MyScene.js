@@ -155,7 +155,7 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
 
-        //this.forest = new MyTreeGroupPatch(this);
+        this.forest = new MyTreeGroupPatch(this);
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
@@ -207,16 +207,16 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.cubemap.display();
+        //this.cubemap.display();
 
 
         //this.prism.display();
-        // this.forest.display();
+        this.forest.display();
 
         this.scale(0.6, 0.6, 0.6)
         //this.house.display();
         // this.hill.display();
-        this.pool.display();
+        //this.pool.display();
         // ---- END Primitive drawing section
     }
 }

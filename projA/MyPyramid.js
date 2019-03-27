@@ -10,6 +10,9 @@ class MyPyramid extends CGFobject {
         this.initBuffers();
     }
     initBuffers() {
+
+
+        this.texCoords = [];
         this.vertices = [];
         this.indices = [];
         this.normals = [];
@@ -19,7 +22,7 @@ class MyPyramid extends CGFobject {
 
         for(var i = 0; i < this.slices; i++){
             // All vertices have to be declared for a given face
-            // even if they are shared with others, as the normals 
+            // even if they are shared with others, as the normals
             // in each face will be different
 
             var sa=Math.sin(ang);
@@ -55,13 +58,15 @@ class MyPyramid extends CGFobject {
 
             this.indices.push(3*i, (3*i+1) , (3*i+2) );
 
+            this.texCoords.push(0.5,0,0, 1,1, 1);
+
             ang+=alphaAng;
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-    
+
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
 
@@ -70,5 +75,3 @@ class MyPyramid extends CGFobject {
         this.initNormalVizBuffers();
     }
 }
-
-
