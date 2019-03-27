@@ -214,7 +214,7 @@ class MyScene extends CGFscene {
         // this.forest.display();
 
         this.scale(0.6, 0.6, 0.6)
-        //this.house.display();
+        // this.house.display();
         // this.hill.display();
         this.pool.display();
         // ---- END Primitive drawing section
