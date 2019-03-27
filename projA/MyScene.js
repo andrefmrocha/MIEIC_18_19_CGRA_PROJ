@@ -127,6 +127,13 @@ class MyScene extends CGFscene {
         this.water.setShininess(10.0);
         this.water.loadTexture('images/water.jpg');
 
+        this.floorTile = new CGFappearance(this);
+        this.floorTile.setAmbient(0.1, 0.1, 0.1, 1);
+        this.floorTile.setDiffuse(0.3, 0.3, 0.3, 1);
+        this.floorTile.setSpecular(0.9, 0.9, 0.9, 1);
+        this.floorTile.setShininess(10.0);
+        this.floorTile.loadTexture('images/floorTile.jpeg');
+
 
         this.materialMineSide = new CGFappearance(this);
         this.materialMineSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -162,6 +169,7 @@ class MyScene extends CGFscene {
         this.hill = new MyVoxelHill(this, 4);
         this.pool = new MyPool(this, 4, 10);
         this.cubemap = new MyCubeMap(this,100);
+        this.floor = new MyFloor(this, 10, 10);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -214,6 +222,7 @@ class MyScene extends CGFscene {
         // this.forest.display();
 
         this.scale(0.6, 0.6, 0.6)
+        this.floor.display();
         // this.house.display();
         // this.hill.display();
         this.pool.display();
