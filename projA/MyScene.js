@@ -170,6 +170,9 @@ class MyScene extends CGFscene {
         this.pool = new MyPool(this, 4, 10);
         this.cubemap = new MyCubeMap(this,100);
         this.floor = new MyFloor(this, 10, 10);
+
+        this.sphere = new MySphere(this,1);
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -219,10 +222,11 @@ class MyScene extends CGFscene {
 
 
         //this.prism.display();
-        this.forest.display();
+        //this.forest.display();
+        this.sphere.display();
 
-        this.scale(0.6, 0.6, 0.6)
-        this.floor.display();
+        //this.scale(0.6, 0.6, 0.6)
+        //this.floor.display();
         // this.house.display();
         // this.hill.display();
         //this.pool.display();
