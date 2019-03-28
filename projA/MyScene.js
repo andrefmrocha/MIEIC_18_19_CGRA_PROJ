@@ -171,7 +171,7 @@ class MyScene extends CGFscene {
         this.cubemap = new MyCubeMap(this,100);
         this.floor = new MyFloor(this, 10, 10);
 
-        this.sphere = new MySphere(this,1);
+        this.sphere = new MySphere(this,3);
 
     }
     initLights() {
