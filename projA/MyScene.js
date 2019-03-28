@@ -197,7 +197,7 @@ class MyScene extends CGFscene {
     }
 
     closeGarage(){
-        console.log("Open the door!");
+        console.log("Close the door!");
     }
 
     initCameras() {
