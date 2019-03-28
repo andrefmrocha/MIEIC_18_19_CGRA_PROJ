@@ -28,4 +28,14 @@ class MyInterface extends CGFinterface {
 
         return true;
     }
+    processKeyboard(event){
+        switch(event.key){
+            case 'o':
+                this.scene.openGarage();
+                break;
+                case 'p':
+                this.scene.closeGarage();
+                break;
+        }
+    }
 }

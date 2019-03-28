@@ -192,6 +192,14 @@ class MyScene extends CGFscene {
         this.cylinder.updateBuffers(this.objectComplexity);
     }
 
+    openGarage(){
+        console.log("Open the door!");
+    }
+
+    closeGarage(){
+        console.log("Open the door!");
+    }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
