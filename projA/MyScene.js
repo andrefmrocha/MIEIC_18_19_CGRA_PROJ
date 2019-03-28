@@ -135,6 +135,14 @@ class MyScene extends CGFscene {
         this.floorTile.loadTexture('images/floorTile.jpeg');
 
 
+        this.garage = new CGFappearance(this);
+        this.garage.setAmbient(0.1, 0.1, 0.1, 1);
+        this.garage.setDiffuse(0.3, 0.3, 0.3, 1);
+        this.garage.setSpecular(0.9, 0.9, 0.9, 1);
+        this.garage.setShininess(10.0);
+        this.garage.loadTexture('images/garage.jpg');
+
+
         this.materialMineSide = new CGFappearance(this);
         this.materialMineSide.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialMineSide.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -166,7 +174,7 @@ class MyScene extends CGFscene {
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
-        this.hill = new MyVoxelHill(this, 4);
+        this.hill = new MyVoxelHill(this, 5);
         this.pool = new MyPool(this, 4, 10);
         this.cubemap = new MyCubeMap(this,100);
         this.floor = new MyFloor(this, 10, 10);
@@ -218,16 +226,16 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        //this.cubemap.display();
+        // this.cubemap.display();
 
 
         //this.prism.display();
         //this.forest.display();
-        this.sphere.display();
+        // this.sphere.display();
 
-        //this.scale(0.6, 0.6, 0.6)
-        //this.floor.display();
-        // this.house.display();
+        this.scale(0.4, 0.4, 0.4)
+        // this.floor.display();
+        this.house.display();
         // this.hill.display();
         //this.pool.display();
         // ---- END Primitive drawing section
