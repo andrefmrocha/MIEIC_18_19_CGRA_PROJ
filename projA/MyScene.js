@@ -18,6 +18,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
+        //this.gl.disable(this.gl.DEPTH_TEST);
 
         this.enableTextures(true);
 
@@ -171,7 +172,7 @@ class MyScene extends CGFscene {
         this.cubemap = new MyCubeMap(this,100);
         this.floor = new MyFloor(this, 10, 10);
 
-        this.sphere = new MySphere(this,3);
+        this.lamp = new MyLamp(this,0.2);
 
     }
     initLights() {
@@ -223,7 +224,7 @@ class MyScene extends CGFscene {
 
         //this.prism.display();
         //this.forest.display();
-        this.sphere.display();
+        this.lamp.display();
 
         //this.scale(0.6, 0.6, 0.6)
         //this.floor.display();

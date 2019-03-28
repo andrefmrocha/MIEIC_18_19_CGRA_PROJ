@@ -20,6 +20,7 @@ serialInclude(['../lib/CGF.js',
                  'MyCubeMap.js',
                  'MyFloor.js',
                  'MySphere.js',
+                 'MyLamp.js',
 
 main=function()
 {
