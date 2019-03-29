@@ -142,6 +142,14 @@ class MyScene extends CGFscene {
         this.floorTile.loadTexture('images/floorTile.jpeg');
 
 
+        this.garage = new CGFappearance(this);
+        this.garage.setAmbient(0.1, 0.1, 0.1, 1);
+        this.garage.setDiffuse(0.3, 0.3, 0.3, 1);
+        this.garage.setSpecular(0.9, 0.9, 0.9, 1);
+        this.garage.setShininess(10.0);
+        this.garage.loadTexture('images/garage.jpg');
+
+
         this.materialMineSide = new CGFappearance(this);
         this.materialMineSide.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialMineSide.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -173,7 +181,7 @@ class MyScene extends CGFscene {
         this.prism = new MyPrism(this,3,2,3);
         this.cylinder = new MyCylinder(this,50,2,3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
-        this.hill = new MyVoxelHill(this, 4);
+        this.hill = new MyVoxelHill(this, 5);
         this.pool = new MyPool(this, 4, 10);
         this.cubemap = new MyCubeMap(this,100);
         this.floor = new MyFloor(this, 10, 10);
@@ -192,6 +200,14 @@ class MyScene extends CGFscene {
     }
     updateObjectComplexity(){
         this.cylinder.updateBuffers(this.objectComplexity);
+    }
+
+    openGarage(){
+        console.log("Open the door!");
+    }
+
+    closeGarage(){
+        console.log("Close the door!");
     }
 
     initCameras() {
@@ -262,7 +278,7 @@ class MyScene extends CGFscene {
         }
 
         this.pushMatrix();
-        this.translate(-6,1,4);
+        this.translate(-2,1,4);
         this.lamp.display();
         this.popMatrix();
 
@@ -276,15 +292,18 @@ class MyScene extends CGFscene {
 
         //this.scale(0.6, 0.6, 0.6)
         //this.floor.display();
+        this.pushMatrix();
+        this.translate(4,0,-3);
         this.house.display();
+        this.popMatrix();
 
         this.pushMatrix();
-        this.translate(-5,0,-5);
+        this.translate(-5,0,-8);
         this.hill.display();
         this.popMatrix();
 
         this.pushMatrix();
-        this.translate(-6,0,0);
+        this.translate(-4,0,2);
         this.pool.display();
         this.popMatrix();
 
