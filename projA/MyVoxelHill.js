@@ -15,12 +15,12 @@ class MyVoxelHill extends CGFobject{
         this.scene.translate(0, -1, 0);
         for(var i = this.levels - 1; i >= 1; i--){
             var nCubes = 2 * i - 1;
-            console.log("nCubes: ", nCubes);
+            //console.log("nCubes: ", nCubes);
             this.scene.pushMatrix();
             this.scene.translate(-i, 0, i);
             this.cube.display();
             for(var j = 0; j < nCubes; j++){
-                console.log("Iteration: ", j);
+                //console.log("Iteration: ", j);
                 this.scene.translate(1, 0, 0);
                 this.cube.display();
             }
@@ -29,7 +29,7 @@ class MyVoxelHill extends CGFobject{
             this.scene.translate(i, 0, i);
             this.cube.display();
             for(var j = 0; j < nCubes; j++){
-                console.log("Iteration: ", j);
+                //console.log("Iteration: ", j);
                 this.scene.translate(0, 0, -1);
                 this.cube.display();
             }
@@ -38,7 +38,7 @@ class MyVoxelHill extends CGFobject{
             this.scene.translate(i, 0, -i);
             this.cube.display();
             for(var j = 0; j < nCubes; j++){
-                console.log("Iteration: ", j);
+                //console.log("Iteration: ", j);
                 this.scene.translate(-1, 0, 0);
                 this.cube.display();
             }
@@ -47,7 +47,7 @@ class MyVoxelHill extends CGFobject{
             this.scene.translate(-i, 0, -i);
             this.cube.display();
             for(var j = 0; j < nCubes; j++){
-                console.log("Iteration: ", j);
+                //console.log("Iteration: ", j);
                 this.scene.translate(0, 0, 1);
                 this.cube.display();
             }

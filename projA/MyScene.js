@@ -15,7 +15,7 @@ class MyScene extends CGFscene {
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
         this.gl.clearDepth(100.0);
-        this.gl.enable(this.gl.DEPTH_TEST);
+        //this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         //this.gl.disable(this.gl.DEPTH_TEST);
@@ -30,6 +30,12 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.objectComplexity = 0.5;
         this.displayNormals = false;
+
+        this.dayStates = {'Day' : 0 , 'Night' : 1};
+        this.selectedDayState = 1;
+        this.setDayState();
+
+        this.displayLamp = false;
 
         // Textures
         //this.wood = new CGFtexture(this, 'images/wood.jpg');
@@ -172,14 +178,17 @@ class MyScene extends CGFscene {
         this.cubemap = new MyCubeMap(this,100);
         this.floor = new MyFloor(this, 10, 10);
 
+        //this.sphere = new MySphere(this,3);
+
         this.lamp = new MyLamp(this,0.2);
 
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+      /*  this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
-        this.lights[0].update();
+        this.lights[0].setVisible();
+        this.lights[0].update();*/
     }
     updateObjectComplexity(){
         this.cylinder.updateBuffers(this.objectComplexity);
@@ -194,6 +203,32 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+    setDayState(){
+      if(this.selectedDayState == 0){
+        this.lights[0].setPosition(0,25,0,1);
+        this.lights[0].setAmbient(1.0, 1, 0.8, 1.0);
+        this.lights[0].setDiffuse(1.0, 1, 1, 1.0);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setConstantAttenuation(1.2);
+        this.lights[0].enable();
+        this.lights[0].setVisible(true);
+        this.lights[0].update();
+
+      }else if (this.selectedDayState == 1) {
+
+        this.lights[0].setPosition(0,25,0,1);
+        this.lights[0].setAmbient(1, 1, 1, 1.0);
+        this.lights[0].setDiffuse(0.6, 0.6, 0.8, 1.0);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setConstantAttenuation(1.5);
+        this.lights[0].enable();
+        this.lights[0].setVisible(true);
+        this.lights[0].update();
+
+      }
+    }
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -218,19 +253,42 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        this.lights[0].update();
 
-        //this.cubemap.display();
+        if(this.displayLamp){
+          this.lamp.enable();
+        }else{
+          this.lamp.disable();
+        }
+
+        this.pushMatrix();
+        this.translate(-6,1,4);
+        this.lamp.display();
+        this.popMatrix();
+
+
+        this.cubemap.display();
 
 
         //this.prism.display();
         //this.forest.display();
-        this.lamp.display();
+
 
         //this.scale(0.6, 0.6, 0.6)
         //this.floor.display();
-        // this.house.display();
-        // this.hill.display();
-        //this.pool.display();
+        this.house.display();
+
+        this.pushMatrix();
+        this.translate(-5,0,-5);
+        this.hill.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-6,0,0);
+        this.pool.display();
+        this.popMatrix();
+
+
         // ---- END Primitive drawing section
     }
 }
