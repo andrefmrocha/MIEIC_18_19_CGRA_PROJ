@@ -34,10 +34,10 @@ class MyScene extends CGFscene {
 
         this.setUpdatePeriod(1000 / 30);
         this.dayStates = {'Day' : 0 , 'Night' : 1};
-        this.selectedDayState = 1;
+        this.selectedDayState = 0;
         this.setDayState();
 
-        this.displayLamp = false;
+        this.displayLamp = true;
 
         // Textures
         //this.wood = new CGFtexture(this, 'images/wood.jpg');
@@ -309,29 +309,29 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
 
-        this.cubemap.display();
+        // this.cubemap.display();
 
 
         //this.prism.display();
         //this.forest.display();
 
 
-        //this.scale(0.6, 0.6, 0.6)
+        this.scale(0.35, 0.35, 0.35)
         //this.floor.display();
         this.pushMatrix();
         this.translate(4,0,-3);
         this.house.display();
         this.popMatrix();
 
-        this.pushMatrix();
-        this.translate(-5,0,-8);
-        this.hill.display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.translate(-5,0,-8);
+        // this.hill.display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.translate(-4,0,2);
-        this.pool.display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.translate(-4,0,2);
+        // this.pool.display();
+        // this.popMatrix();
 
 
         // ---- END Primitive drawing section
