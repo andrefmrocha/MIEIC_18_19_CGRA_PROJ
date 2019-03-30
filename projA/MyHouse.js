@@ -7,7 +7,9 @@ class MyHouse extends CGFobject{
         this.cylinder = new MyCylinder(scene, 6, 0.3, 2);
         this.cube = new MyUnitCubeQuad(scene);
         this.roof = new MyPyramid(scene, 4, 0);
-        this.doorOpening = 0;
+        this.doorOpening = false;
+        this.garageY = 0;
+        this.doorClosing = false;
     }
     
     display(){
@@ -57,6 +59,7 @@ class MyHouse extends CGFobject{
         this.scene.translate(-9.05, 0, 0);
         this.scene.scale(1, 0.99, 1);
         this.scene.garage.apply();
+        this.scene.translate(0, this.garageY, 0);
         this.cube.display();
         this.brickTexture.apply();
         this.scene.popMatrix();
@@ -101,13 +104,34 @@ class MyHouse extends CGFobject{
         
     }
     openDoor(){
-        this.doorOpening = 2000;
+        if(this.doorClosing === false)
+            this.doorOpening = true;
+    }
+
+    closeDoor(){
+        if(this.doorOpening === false)
+            this.doorClosing = true;
     }
 
     update(delta){
-        console.log("Door is opening!");
-        this.doorOpening-=delta;7
-        if(this.doorOpening <= 0)
-            this.doorOpening = 0;
+        var movement = delta * 0.001;
+        if(this.doorOpening){
+            console.log("Door is opening!");
+            if ((this.garageY + movement) > 2)
+                this.garageY = 2;
+            else
+                this.garageY += movement;
+            if(this.garageY === 2)
+                this.doorOpening = false;
+        }
+        else if(this.doorClosing){
+            console.log("Door is closing!");
+            if( (this.garageY - movement) < 0)
+                this.garageY = 0;
+            else
+                this.garageY -= movement;
+            if (this.garageY === 0)
+                this.doorClosing = false;
+        }
     }
 }

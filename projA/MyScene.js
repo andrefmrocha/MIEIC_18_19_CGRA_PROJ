@@ -206,19 +206,23 @@ class MyScene extends CGFscene {
             this.closeGarage(delta);
         }
 
-        if(this.house.doorOpening !== 0){
+        if(this.house.doorOpening === true){
+            this.house.update(delta);
+        } else if(this.house.doorClosing === true){
             this.house.update(delta);
         }
     }
 
     openGarage(delta){
         console.log("Open the door!", delta);
-        if(this.house.doorOpening === 0)
+        if(this.house.doorOpening === false)
             this.house.openDoor();
     }
 
     closeGarage(delta){
         console.log("Close the door!", delta);
+        if(this.house.doorClosing === false)
+            this.house.closeDoor();
     }
 
 
