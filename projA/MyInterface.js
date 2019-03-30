@@ -15,6 +15,8 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
         
         var obj = this;
+        this.model = {};
+        this.initKeys();
 
         this.gui.add(this.scene, 'displayAxis').name("Display axis");
 
@@ -28,14 +30,21 @@ class MyInterface extends CGFinterface {
 
         return true;
     }
-    processKeyboard(event){
-        switch(event.key){
-            case 'o':
-                this.scene.openGarage();
-                break;
-                case 'p':
-                this.scene.closeGarage();
-                break;
-        }
+    initKeys() {
+        this.scene.gui = this;
+        this.processKeyboard = function () { };
+        this.model.activeKeys = {};
+    }
+
+    processKeyDown(event) {
+        this.model.activeKeys[event.code] = true;
+    };
+
+    processKeyUp(event) {
+        this.model.activeKeys[event.code] = false;
+    };
+
+    isKeyPressed(keyCode) {
+        return this.model.activeKeys[keyCode] || false;
     }
 }

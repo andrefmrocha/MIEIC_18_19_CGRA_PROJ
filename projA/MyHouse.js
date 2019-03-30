@@ -7,6 +7,7 @@ class MyHouse extends CGFobject{
         this.cylinder = new MyCylinder(scene, 6, 0.3, 2);
         this.cube = new MyUnitCubeQuad(scene);
         this.roof = new MyPyramid(scene, 4, 0);
+        this.doorOpening = 0;
     }
     
     display(){
@@ -98,5 +99,15 @@ class MyHouse extends CGFobject{
         this.scene.popMatrix();
         
         
+    }
+    openDoor(){
+        this.doorOpening = 2000;
+    }
+
+    update(delta){
+        console.log("Door is opening!");
+        this.doorOpening-=delta;7
+        if(this.doorOpening <= 0)
+            this.doorOpening = 0;
     }
 }

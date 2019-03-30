@@ -5,6 +5,7 @@
 class MyScene extends CGFscene {
     constructor() {
         super();
+        this.time = 0;
     }
     init(application) {
         super.init(application);
@@ -29,6 +30,8 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.objectComplexity = 0.5;
         this.displayNormals = false;
+
+        this.setUpdatePeriod(1000 / 30);
 
         // Textures
         //this.wood = new CGFtexture(this, 'images/wood.jpg');
@@ -192,13 +195,33 @@ class MyScene extends CGFscene {
         this.cylinder.updateBuffers(this.objectComplexity);
     }
 
-    openGarage(){
-        console.log("Open the door!");
+    update(currTime){
+        
+        var delta = currTime - this.time;
+        this.time = currTime;
+
+        if(this.gui.isKeyPressed("KeyO")){
+            this.openGarage(delta);
+        } else if (this.gui.isKeyPressed("KeyP")){
+            this.closeGarage(delta);
+        }
+
+        if(this.house.doorOpening !== 0){
+            this.house.update(delta);
+        }
     }
 
-    closeGarage(){
-        console.log("Close the door!");
+    openGarage(delta){
+        console.log("Open the door!", delta);
+        if(this.house.doorOpening === 0)
+            this.house.openDoor();
     }
+
+    closeGarage(delta){
+        console.log("Close the door!", delta);
+    }
+
+
 
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
