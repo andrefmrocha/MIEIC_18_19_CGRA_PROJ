@@ -205,7 +205,7 @@ class MyScene extends CGFscene {
     }
 
     update(currTime){
-        
+
         var delta = currTime - this.time;
         this.time = currTime;
 
@@ -271,6 +271,46 @@ class MyScene extends CGFscene {
       }
     }
 
+    cenario(){
+      this.lights[0].update();
+
+      if(this.displayLamp){
+        this.lamp.enable();
+      }else{
+        this.lamp.disable();
+      }
+
+      this.pushMatrix();
+      this.translate(-2,1,4);
+      this.lamp.display();
+      this.popMatrix();
+
+
+       this.cubemap.display();
+
+
+      //this.prism.display();
+      //this.forest.display();
+
+
+      this.scale(0.35, 0.35, 0.35)
+      //this.floor.display();
+      this.pushMatrix();
+      this.translate(4,0,-3);
+      this.house.display();
+      this.popMatrix();
+
+       this.pushMatrix();
+       this.translate(-5,0,-8);
+       this.hill.display();
+       this.popMatrix();
+
+       this.pushMatrix();
+       this.translate(-4,0,2);
+       this.pool.display();
+       this.popMatrix();
+    }
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -295,44 +335,8 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.lights[0].update();
 
-        if(this.displayLamp){
-          this.lamp.enable();
-        }else{
-          this.lamp.disable();
-        }
-
-        this.pushMatrix();
-        this.translate(-2,1,4);
-        this.lamp.display();
-        this.popMatrix();
-
-
-        // this.cubemap.display();
-
-
-        //this.prism.display();
-        //this.forest.display();
-
-
-        this.scale(0.35, 0.35, 0.35)
-        //this.floor.display();
-        this.pushMatrix();
-        this.translate(4,0,-3);
-        this.house.display();
-        this.popMatrix();
-
-        // this.pushMatrix();
-        // this.translate(-5,0,-8);
-        // this.hill.display();
-        // this.popMatrix();
-
-        // this.pushMatrix();
-        // this.translate(-4,0,2);
-        // this.pool.display();
-        // this.popMatrix();
-
+        this.forest.display();
 
         // ---- END Primitive drawing section
     }
