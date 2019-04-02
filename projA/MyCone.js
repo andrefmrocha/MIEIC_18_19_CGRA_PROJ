@@ -29,14 +29,14 @@ class MyCone extends CGFobject {
             //this.texCoords.push(i/this.slices , 1 , ((i+1))/this.slices , 1 , ((i+1))/this.slices , i/this.slices , (i)/this.slices , i/this.slices );
             //this.texCoords.push(i/this.slices , 0 , (i+1)/this.slides , 0, (i+0.5)/this.slides , 1);
             //this.texCoords.push(1/this.slices,0,2/this.slices,1,0.5,0);
-            this.texCoords.push(0.5,0,0,1,1,1);
+            this.texCoords.push(i/this.slices,1);
         }
         //this.texCoords.push(1/this.slices,0,2/this.slices,1,0.5,0);
         //this.texCoords.push(1/this.slices,0,2/this.slices,1,0.5,0);
         //this.texCoords.push(0.5,0,0,1,1,1);
+        this.texCoords.push(0.5,0);
         this.vertices.push(0,this.height,0);
         this.normals.push(0,this.height,0);
-
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
