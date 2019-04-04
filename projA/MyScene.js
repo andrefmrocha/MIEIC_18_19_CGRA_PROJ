@@ -138,10 +138,10 @@ class MyScene extends CGFscene {
 
         this.floorTile = new CGFappearance(this);
         this.floorTile.setAmbient(0.1, 0.1, 0.1, 1);
-        this.floorTile.setDiffuse(0.3, 0.3, 0.3, 1);
-        this.floorTile.setSpecular(0.9, 0.9, 0.9, 1);
+        this.floorTile.setDiffuse(1, 1, 1, 1);
+        this.floorTile.setSpecular(1, 1, 1, 1);
         this.floorTile.setShininess(10.0);
-        this.floorTile.loadTexture('images/floorTile.jpeg');
+        this.floorTile.loadTexture('images/mineTop.png');
 
 
         this.garage = new CGFappearance(this);
@@ -176,6 +176,18 @@ class MyScene extends CGFscene {
         this.materialMineBottom.setShininess(10.0);
         this.materialMineBottom.setTexture(this.textureMineBottom);
 
+        this.materialOrange = new CGFappearance(this);
+        this.materialOrange.setAmbient(0.75,0.45,0, 1);
+        this.materialOrange.setDiffuse(0.5,0.3,0, 1);
+        this.materialOrange.setSpecular(0.125,0.075,0, 1);
+        this.materialOrange.setShininess(10.0);
+
+        this.materialApple = new CGFappearance(this);
+        this.materialApple.setAmbient(1,0,0, 1);
+        this.materialApple.setDiffuse(1,0,0, 1);
+        this.materialApple.setSpecular(0.25,0,0, 1);
+        this.materialApple.setShininess(10.0);
+
 
         //Objects connected to MyInterface
 
@@ -185,12 +197,15 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
         this.hill = new MyVoxelHill(this, 5);
         this.pool = new MyPool(this, 4, 10);
-        this.cubemap = new MyCubeMap(this,100);
+        this.cubemap = new MyCubeMap(this,50);
         this.floor = new MyFloor(this, 10, 10);
+        this.apple = new MyApple(this,3);
 
         //this.sphere = new MySphere(this,3);
+        this.circle = new MyCircle(this,10);
 
         this.lamp = new MyLamp(this,0.2);
+        this.fire = new MyFirePit(this);
 
     }
     initLights() {
@@ -274,6 +289,17 @@ class MyScene extends CGFscene {
     cenario(){
       this.lights[0].update();
 
+      this.pushMatrix();
+      this.translate(-25,0,-15);
+      for(var x = -25; x < 25 ; x+=10){
+        for(var y = -25; y < 25 ; y+=10){
+          this.floor.display();
+          this.translate(10,0,0);
+        }
+        this.translate(-50,0,10);
+      }
+      this.popMatrix()
+
       if(this.displayLamp){
         this.lamp.enable();
       }else{
@@ -290,11 +316,18 @@ class MyScene extends CGFscene {
 
 
       //this.prism.display();
-      //this.forest.display();
 
 
-      this.scale(0.35, 0.35, 0.35)
+
+      this.scale(0.35, 0.35, 0.35);
       //this.floor.display();
+
+      this.pushMatrix();
+      this.scale(2,2,2);
+      this.translate(10,0,-4);
+      this.forest.display();
+      this.popMatrix();
+
       this.pushMatrix();
       this.translate(4,0,-3);
       this.house.display();
@@ -336,7 +369,10 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.forest.display();
+        //this.forest.display();
+        //this.cenario();
+        //this.apple.display();
+        this.fire.display();
 
         // ---- END Primitive drawing section
     }

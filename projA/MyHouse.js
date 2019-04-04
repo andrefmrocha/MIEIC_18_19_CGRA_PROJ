@@ -11,7 +11,7 @@ class MyHouse extends CGFobject{
         this.garageY = 0;
         this.doorClosing = false;
     }
-    
+
     display(){
 
         this.scene.pushMatrix();
@@ -40,15 +40,15 @@ class MyHouse extends CGFobject{
         this.scene.scale(0.7, 1.4, 0.7);
         this.cylinder.display();
         this.scene.popMatrix();
-        
-                
+
+
         //Chimney
         this.scene.pushMatrix();
         this.scene.translate(1.7, 5.95, 0);
         this.scene.scale(0.7, 0.5, 0.7);
         this.cylinder.display();
         this.scene.popMatrix();
-        
+
         // Garage
         this.scene.pushMatrix();
         this.scene.scale(1.5, 1.5, 1.5);
@@ -86,7 +86,7 @@ class MyHouse extends CGFobject{
         this.cube.display();
         this.scene.popMatrix();
 
-        
+
         // Roof
         this.scene.pushMatrix();
         this.scene.translate(0, 5.5, 0);
@@ -108,8 +108,8 @@ class MyHouse extends CGFobject{
         this.scene.popMatrix();
 
 
-     
-        
+
+
     }
     openDoor(){
         if(this.doorClosing === false)

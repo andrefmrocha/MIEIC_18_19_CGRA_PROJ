@@ -38,6 +38,10 @@ class MyCone extends CGFobject {
         this.vertices.push(0,this.height,0);
         this.normals.push(0,this.height,0);
 
+        var tmp = this.indices.slice(0);
+        tmp.reverse();
+        this.indices = this.indices.concat(tmp);
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
