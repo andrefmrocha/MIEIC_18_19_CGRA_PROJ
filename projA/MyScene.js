@@ -114,6 +114,7 @@ class MyScene extends CGFscene {
         this.brick.setSpecular(0.1, 0.1, 0.1, 1);
         this.brick.setShininess(10.0);
         this.brick.loadTexture('images/brick.jpg');
+        this.brick.setTextureWrap('REPEAT', 'REPEAT');
 
         this.door = new CGFappearance(this);
         this.door.setAmbient(0.1, 0.1, 0.1, 1);
@@ -225,7 +226,10 @@ class MyScene extends CGFscene {
     openGarage(delta){
         console.log("Open the door!", delta);
         if(this.house.doorOpening === false)
+        {
+            // this.house.garageY = -1;
             this.house.openDoor();
+        }
     }
 
     closeGarage(delta){
@@ -336,7 +340,9 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.forest.display();
+        // this.forest.display();
+
+        this.house.display();
 
         // ---- END Primitive drawing section
     }

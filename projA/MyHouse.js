@@ -9,6 +9,8 @@ class MyHouse extends CGFobject{
         this.roof = new MyPyramid(scene, 4, 0);
         this.doorOpening = false;
         this.garageY = 0;
+        this.garageZ = 0;
+        this.angle = 0;
         this.doorClosing = false;
     }
     
@@ -20,12 +22,13 @@ class MyHouse extends CGFobject{
         this.scene.pushMatrix();
         // (0,3,0) is the offset to make it back to the actual position
         // (0,3,0) is the offset to make it to the top of the garage (from the base of the garage with the offset)
-        // this.scene.translate(0, 6, -2.5);
-        // this.scene.rotate(Math.PI/2, 1, 0, 0);
+        // this.scene.translate(0, 1.4, 2.5);
+        // this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.translate(0, this.garageY, this.garageZ);
+        this.scene.rotate(this.angle, 1, 0, 0);
         this.scene.translate(5.9,  -2.1, 2.47);
         this.scene.scale(5, 4.3, 1);
         this.scene.garage.apply();
-        this.scene.translate(0, this.garageY, 0);
         this.cube.display();
         this.scene.popMatrix();
 
@@ -129,20 +132,46 @@ class MyHouse extends CGFobject{
         var movement = delta * 0.001;
         if(this.doorOpening){
             console.log("Door is opening!");
-            if ((this.garageY + movement) > 2)
-                this.garageY = 2;
+            if ((this.garageY + movement) > 1.4)
+                this.garageY = 1.4;
+            else if(this.angle <= -Math.PI/4)
+                this.garageY += 2 * movement;
             else
-                this.garageY += movement;
-            if(this.garageY === 2)
+                this.garageY -= 1.2 * movement;
+            if((this.garageZ + movement) > 2.5)
+                this.garageZ = 2.5;
+            else
+                this.garageZ += movement;
+            if((this.angle - movement) <  -Math.PI/2)
+                this.angle = -Math.PI/2;
+            else
+                this.angle -=0.6 * movement;
+            if(this.garageY === 1.4 && this.angle === -Math.PI/2 && this.garageZ === this.garageZ)
                 this.doorOpening = false;
         }
         else if(this.doorClosing){
             console.log("Door is closing!");
             if( (this.garageY - movement) < 0)
                 this.garageY = 0;
+            else if (this.angle >= -Math.PI / 4)
+                this.garageY -= 2 * movement;
             else
                 this.garageY -= movement;
-            if (this.garageY === 0)
+
+            if ((this.garageZ - movement) < 0)
+                this.garageZ = 0;
+            else
+                this.garageZ -= 1.7 * movement;
+
+            if ((this.angle + movement) > 0)
+                this.angle = 0;
+            else if(this.garageY >= -Math.PI/4)
+                this.angle += 0.2 * movement;
+            else
+                this.angle += movement;
+
+
+            if (this.garageY === 0 && this.garageZ === 0 && this.angle === 0) 
                 this.doorClosing = false;
         }
     }
