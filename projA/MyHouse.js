@@ -151,22 +151,25 @@ class MyHouse extends CGFobject{
         }
         else if(this.doorClosing){
             console.log("Door is closing!");
-            if( (this.garageY - movement) < 0)
-                this.garageY = 0;
-            else if (this.angle >= -Math.PI / 4)
-                this.garageY -= 2 * movement;
+            if( (this.garageY - movement) < 0 && this.angle >= -Math.PI/4)
+            {
+                if(this.garageY + movement > 0)
+                    this.garageY = 0;
+                else
+                    this.garageY += movement;
+            }
             else
-                this.garageY -= movement;
+                this.garageY -= 2.3 * movement;
 
-            if ((this.garageZ - movement) < 0)
+            if ((this.garageZ - 2 * movement) < 0)
                 this.garageZ = 0;
             else
-                this.garageZ -= 1.7 * movement;
+                this.garageZ -= 2 * movement;
 
             if ((this.angle + movement) > 0)
                 this.angle = 0;
-            else if(this.garageY >= -Math.PI/4)
-                this.angle += 0.2 * movement;
+            else if(this.garageY >= 0.7)
+                this.angle += 0.05 * movement;
             else
                 this.angle += movement;
 
