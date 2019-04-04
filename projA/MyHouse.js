@@ -14,7 +14,13 @@ class MyHouse extends CGFobject{
     
     display(){
 
+        
         this.scene.pushMatrix();
+        this.scene.scale(0.5, 0.5, 0.5);
+        this.scene.pushMatrix();
+        // (0,3,0) is the offset to make it back to the actual position
+        // (0,3,0) is the offset to make it to the top of the garage (from the base of the garage with the offset)
+        // this.scene.translate(0, 6, -2.5);
         // this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.translate(5.9,  -2.1, 2.47);
         this.scene.scale(5, 4.3, 1);
@@ -106,9 +112,7 @@ class MyHouse extends CGFobject{
         this.doorTexture.apply();
         this.cube.display();
         this.scene.popMatrix();
-
-
-     
+        this.scene.popMatrix();
         
     }
     openDoor(){
