@@ -25,9 +25,9 @@ class MyLamp extends CGFobject {
         this.scene.lights[1].update();
         /* this.scene.pushMatrix();
 		this.materialGlass.apply();
-    this.scene.scale(this.radius,this.radius,this.radius);
-    //this.sphere.display();
-    this.scene.popMatrix(); */
+        this.scene.scale(this.radius,this.radius,this.radius);
+        //this.sphere.display();
+        this.scene.popMatrix(); */
     }
     enable () {
         this.scene.lights[1].enable();

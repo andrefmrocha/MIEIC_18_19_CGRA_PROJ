@@ -3,7 +3,7 @@ module.exports = {
     plugins: ["standard"],
     rules: {
         "no-var": "error", // optional, recommended when using es6+
-        "no-unused-vars": 1, // recommended
+        "no-unused-vars": 0, // recommended
         "arrow-spacing": ["error", { before: true, after: true }], // recommended
         indent: ["error", 4],
         "comma-dangle": [
