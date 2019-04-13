@@ -1,14 +1,15 @@
 /* eslint-disable no-undef */
 class MyVoxelHill extends CGFobject {
-    constructor (scene, levels) {
+    constructor (scene, levels, applyingTexture) {
         super(scene);
         this.cube = new MyUnitCubeQuad(scene);
         this.levels = levels;
+        this.applyingTexture = applyingTexture;
     }
 
     display () {
         this.scene.pushMatrix();
-        this.scene.materialMineTop.apply();
+        this.applyingTexture.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         // Multiplos de 8
         // 3, 5, 7...

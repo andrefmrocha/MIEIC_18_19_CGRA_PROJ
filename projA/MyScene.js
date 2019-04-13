@@ -166,6 +166,14 @@ class MyScene extends CGFscene {
         this.materialMineTop.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialMineTop.setShininess(10.0);
         this.materialMineTop.setTexture(this.textureMineTop);
+        // -------
+
+        this.rockMaterial = new CGFappearance(this);
+        this.rockMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rockMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rockMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rockMaterial.setShininess(10.0);
+        this.rockMaterial.loadTexture('images/rock.jpg');
 
         // -------
         this.materialMineBottom = new CGFappearance(this);
@@ -193,7 +201,8 @@ class MyScene extends CGFscene {
         this.prism = new MyPrism(this, 3, 2, 3);
         this.cylinder = new MyCylinder(this, 50, 2, 3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
-        this.hill = new MyVoxelHill(this, 5);
+        this.greenHill = new MyVoxelHill(this, 5, this.materialMineTop);
+        this.rockHill = new MyVoxelHill(this, 10, this.rockMaterial);
         this.pool = new MyPool(this, 4, 10);
         this.cubemap = new MyCubeMap(this, 50);
         this.floor = new MyFloor(this, 10, 10);
@@ -321,7 +330,12 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.translate(-5, 0, -8);
-        this.hill.display();
+        this.greenHill.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(45, 0, -40);
+        this.rockHill.display();
         this.popMatrix();
 
         this.pushMatrix();
@@ -341,7 +355,6 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
         this.enableTextures(this.textures);
-
 
         // Draw axis
         if (this.displayAxis) { this.axis.display(); }
