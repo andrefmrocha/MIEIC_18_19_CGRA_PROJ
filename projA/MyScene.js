@@ -22,8 +22,6 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         // this.gl.disable(this.gl.DEPTH_TEST);
 
-        this.enableTextures(true);
-
         // Initialize scene objects
         this.axis = new CGFaxis(this);
 
@@ -38,6 +36,8 @@ class MyScene extends CGFscene {
         this.setDayState();
 
         this.displayLamp = true;
+
+        this.textures = true;
 
         // Textures
         // this.wood = new CGFtexture(this, 'images/wood.jpg');
@@ -212,10 +212,6 @@ class MyScene extends CGFscene {
         this.lights[0].setVisible();
         this.lights[0].update(); */
     }
-    updateObjectComplexity () {
-        this.cylinder.updateBuffers(this.objectComplexity);
-    }
-
     update (currTime) {
         let delta = currTime - this.time;
         this.time = currTime;
@@ -247,7 +243,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras () {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-15, 5, 15), vec3.fromValues(5, 0, 0));
     }
     setDefaultAppearance () {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -257,7 +253,8 @@ class MyScene extends CGFscene {
     }
 
     setDayState () {
-        if (this.selectedDayState === 0) {
+        // eslint-disable-next-line eqeqeq
+        if (this.selectedDayState == this.dayStates['Day']) {
             this.lights[0].setPosition(0, 25, 0, 1);
             this.lights[0].setAmbient(1.0, 1, 0.8, 1.0);
             this.lights[0].setDiffuse(1.0, 1, 1, 1.0);
@@ -266,7 +263,8 @@ class MyScene extends CGFscene {
             this.lights[0].enable();
             this.lights[0].setVisible(true);
             this.lights[0].update();
-        } else if (this.selectedDayState === 1) {
+        // eslint-disable-next-line eqeqeq
+        } else if (this.selectedDayState == this.dayStates['Night']) {
             this.lights[0].setPosition(0, 25, 0, 1);
             this.lights[0].setAmbient(1, 1, 1, 1.0);
             this.lights[0].setDiffuse(0.6, 0.6, 0.8, 1.0);
@@ -327,7 +325,7 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.pushMatrix();
-        this.translate(-4, 0, 2);
+        this.translate(-4, 0.2, 2);
         this.pool.display();
         this.popMatrix();
     }
@@ -342,6 +340,8 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        this.enableTextures(this.textures);
+
 
         // Draw axis
         if (this.displayAxis) { this.axis.display(); }
@@ -356,9 +356,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.forest.display();
         this.cenario();
-        this.apple.display();
         // this.fire.display();
 
         // ---- END Primitive drawing section

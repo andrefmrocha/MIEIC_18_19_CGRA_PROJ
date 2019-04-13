@@ -22,13 +22,11 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'displayAxis').name('Display axis');
 
-        this.gui.add(this.scene, 'objectComplexity', 0.01, 50.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
-
         this.gui.add(this.scene, 'selectedDayState', this.scene.dayStates).name('Selected day state').onChange(this.scene.setDayState.bind(this.scene));
 
         this.gui
-            .add(this.scene, 'displayNormals')
-            .name('Display normals');
+            .add(this.scene, 'textures')
+            .name('Enable Textures');
 
         this.gui.add(this.scene, 'displayLamp').name('Lamp');
 
