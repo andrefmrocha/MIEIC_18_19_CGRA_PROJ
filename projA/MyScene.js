@@ -31,7 +31,7 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
 
         this.setUpdatePeriod(1000 / 30);
-        this.dayStates = { 'Day': 0, 'Night': 1 };
+        this.dayStates = { 'Day': 0, 'Night1': 1  , 'Night2' : 2 };
         this.selectedDayState = 0;
         this.setDayState();
 
@@ -107,6 +107,53 @@ class MyScene extends CGFscene {
         this.materialHillsDn.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialHillsDn.setShininess(10.0);
         this.materialHillsDn.loadTexture('images/skybox/hills_dn.jpg');
+
+
+
+
+
+
+        this.materialNightBk = new CGFappearance(this);
+        this.materialNightBk.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialNightBk.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialNightBk.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialNightBk.setShininess(10.0);
+        this.materialNightBk.loadTexture('images/hw_nightsky/nightsky_bk.jpg');
+
+        this.materialNightFt = new CGFappearance(this);
+        this.materialNightFt.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialNightFt.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialNightFt.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialNightFt.setShininess(10.0);
+        this.materialNightFt.loadTexture('images/hw_nightsky/nightsky_ft.jpg');
+
+        this.materialNightLf = new CGFappearance(this);
+        this.materialNightLf.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialNightLf.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialNightLf.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialNightLf.setShininess(10.0);
+        this.materialNightLf.loadTexture('images/hw_nightsky/nightsky_lf.jpg');
+
+        this.materialNightRf = new CGFappearance(this);
+        this.materialNightRf.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialNightRf.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialNightRf.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialNightRf.setShininess(10.0);
+        this.materialNightRf.loadTexture('images/hw_nightsky/nightsky_rt.jpg');
+
+        this.materialNightUp = new CGFappearance(this);
+        this.materialNightUp.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialNightUp.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialNightUp.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialNightUp.setShininess(10.0);
+        this.materialNightUp.loadTexture('images/hw_nightsky/nightsky_up.jpg');
+
+        this.materialNightDn = new CGFappearance(this);
+        this.materialNightDn.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialNightDn.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialNightDn.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialNightDn.setShininess(10.0);
+        this.materialNightDn.loadTexture('images/hw_nightsky/nightsky_dn.jpg');
 
         this.brick = new CGFappearance(this);
         this.brick.setAmbient(0.1, 0.1, 0.1, 1);
@@ -184,13 +231,13 @@ class MyScene extends CGFscene {
         this.materialMineBottom.setTexture(this.textureMineBottom);
 
         this.materialOrange = new CGFappearance(this);
-        this.materialOrange.setAmbient(0.75, 0.45, 0, 1);
-        this.materialOrange.setDiffuse(0.5, 0.3, 0, 1);
-        this.materialOrange.setSpecular(0.125, 0.075, 0, 1);
+        this.materialOrange.setAmbient(0.75/4, 0.45/4, 0, 1);
+        this.materialOrange.setDiffuse(1, 0.6, 0, 1);
+        this.materialOrange.setSpecular(0.2, 0.15, 0, 1);
         this.materialOrange.setShininess(10.0);
 
         this.materialApple = new CGFappearance(this);
-        this.materialApple.setAmbient(1, 0, 0, 1);
+        this.materialApple.setAmbient(1/4, 0, 0, 1);
         this.materialApple.setDiffuse(1, 0, 0, 1);
         this.materialApple.setSpecular(0.25, 0, 0, 1);
         this.materialApple.setShininess(10.0);
@@ -204,7 +251,8 @@ class MyScene extends CGFscene {
         this.greenHill = new MyVoxelHill(this, 5, this.materialMineTop);
         this.rockHill = new MyVoxelHill(this, 10, this.rockMaterial);
         this.pool = new MyPool(this, 4, 10);
-        this.cubemap = new MyCubeMap(this, 50);
+        this.cubemapday = new MyCubeMapDay(this, 50);
+        this.cubemapnight = new MyCubeMapNight(this, 50);
         this.floor = new MyFloor(this, 10, 10);
         this.apple = new MyApple(this, 3);
 
@@ -270,17 +318,26 @@ class MyScene extends CGFscene {
             this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
             this.lights[0].setConstantAttenuation(1.2);
             this.lights[0].enable();
-            this.lights[0].setVisible(true);
+            //this.lights[0].setVisible(true);
             this.lights[0].update();
         // eslint-disable-next-line eqeqeq
-        } else if (this.selectedDayState == this.dayStates['Night']) {
+      } else if (this.selectedDayState == this.dayStates['Night1']) {
             this.lights[0].setPosition(0, 25, 0, 1);
             this.lights[0].setAmbient(1, 1, 1, 1.0);
             this.lights[0].setDiffuse(0.6, 0.6, 0.8, 1.0);
             this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
             this.lights[0].setConstantAttenuation(1.5);
             this.lights[0].enable();
-            this.lights[0].setVisible(true);
+            //this.lights[0].setVisible(true);
+            this.lights[0].update();
+        }else if (this.selectedDayState == this.dayStates['Night2']) {
+            this.lights[0].setPosition(0, 0.5, 0, 1);
+            this.lights[0].setAmbient(0.98*0.8, 0.8 * 0.8, 0.5*0.8, 1.0);
+            this.lights[0].setDiffuse(0.98, 0.7, 0.5, 1.0);
+            this.lights[0].setSpecular(0.98/4, 0.7/4, 0.5/4, 1.0);
+            this.lights[0].setConstantAttenuation(1);
+            this.lights[0].enable();
+            //this.lights[0].setVisible(true);
             this.lights[0].update();
         }
     }
@@ -310,7 +367,10 @@ class MyScene extends CGFscene {
         this.lamp.display();
         this.popMatrix();
 
-        this.cubemap.display();
+        if(this.selectedDayState == 0)
+          this.cubemapday.display();
+        else this.cubemapnight.display();
+
 
         // this.prism.display();
 
