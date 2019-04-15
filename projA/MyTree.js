@@ -1,32 +1,42 @@
 /* eslint-disable no-undef */
 class MyTree extends CGFobject {
-    constructor (scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture) {
+    constructor (scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture , fruit) {
         super(scene);
         this.trunk = new MyCylinder(scene, 10, trunkRadius, trunkHeight);
         this.treeTop = new MyCone(scene, 10, treeTopRadius, treeTopHeight);
         this.trunkTexture = trunkTexture;
         this.treeTopTexture = treeTopTexture;
 
-        this.apple = new MyOrange(this.scene, 0.1);
+        if(fruit == undefined){
+          this.fruit = undefined;
+        }
+        else if(fruit == 0)
+          this.fruit = new MyOrange(this.scene, 0.1);
+        else if(fruit == 1)
+          this.fruit = new MyApple(this.scene, 0.1);
+        else {
+          this.fruit = undefined;
+        }
 
-        this.appleCoords = [];
-
-        for (let i = 0; i < 5; i++) {
-            let check = true;
-            let ang = Math.random() * 2 * Math.PI;
-            let hl = Math.random() * treeTopHeight * 0.70 + treeTopHeight * 0.15;
-            let rl = treeTopRadius - hl * (treeTopRadius) / treeTopHeight + this.apple.radius / 2;
-            let x = rl * Math.cos(ang);
-            let y = rl * Math.sin(ang);
-            for (let a = 0; a < this.appleCoords.length; a += 3) {
-                if (Math.sqrt(Math.pow(x - this.appleCoords[a], 2) + Math.pow(y - this.appleCoords[a + 2], 2) + Math.pow(hl - this.appleCoords[a + 1], 2)) < 3 * this.apple.radius) {
-                    check = false;
-                    break;
-                }
-            }
-            if (check) {
-                this.appleCoords.push(x, hl, y);
-            }
+        this.fruitCoords = [];
+        if(this.fruit != undefined){
+          for (let i = 0; i < 5; i++) {
+              let check = true;
+              let ang = Math.random() * 2 * Math.PI;
+              let hl = Math.random() * treeTopHeight * 0.70 + treeTopHeight * 0.15;
+              let rl = treeTopRadius - hl * (treeTopRadius) / treeTopHeight + this.fruit.radius / 2;
+              let x = rl * Math.cos(ang);
+              let y = rl * Math.sin(ang);
+              for (let a = 0; a < this.fruitCoords.length; a += 3) {
+                  if (Math.sqrt(Math.pow(x - this.fruitCoords[a], 2) + Math.pow(y - this.fruitCoords[a + 2], 2) + Math.pow(hl - this.fruitCoords[a + 1], 2)) < 3 * this.fruit.radius) {
+                      check = false;
+                      break;
+                  }
+              }
+              if (check) {
+                  this.fruitCoords.push(x, hl, y);
+              }
+          }
         }
     }
 
@@ -39,12 +49,13 @@ class MyTree extends CGFobject {
         if (this.treeTopTexture !== 0) { this.treeTopTexture.apply(); }
         this.treeTop.display();
         this.scene.popMatrix();
-
-        for (let a = 0; a < this.appleCoords.length; a += 3) {
-            this.scene.pushMatrix();
-            this.scene.translate(this.appleCoords[a], this.appleCoords[a + 1] + this.trunk.height, this.appleCoords[a + 2]);
-            this.apple.display();
-            this.scene.popMatrix();
+        if(this.fruit != undefined){
+          for (let a = 0; a < this.fruitCoords.length; a += 3) {
+              this.scene.pushMatrix();
+              this.scene.translate(this.fruitCoords[a], this.fruitCoords[a + 1] + this.trunk.height, this.fruitCoords[a + 2]);
+              this.fruit.display();
+              this.scene.popMatrix();
+          }
         }
     }
 

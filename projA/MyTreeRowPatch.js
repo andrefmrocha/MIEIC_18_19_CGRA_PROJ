@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 class MyTreeRowPatch extends CGFobject {
-    constructor (scene) {
+    constructor (scene,fruit) {
         super(scene);
-        this.tree1 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop);
-        this.tree2 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop);
-        this.tree3 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop);
-        this.tree4 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop);
-        this.tree5 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop);
-        this.tree6 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop);
+        this.tree1 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop,fruit);
+        this.tree2 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop,fruit);
+        this.tree3 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop,fruit);
+        this.tree4 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop,fruit);
+        this.tree5 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop,fruit);
+        this.tree6 = new MyTree(scene, 1.8 + this.r(-0.2, 0.4), 0.6 + this.r(-0.1, 0.1), 2 + this.r(-0.25, 0.5), 1.2 + this.r(-0.15, 0.15), this.scene.materialWood, this.scene.materialTreeTop,fruit);
 
         this.x_rand = [];
         this.y_rand = [];

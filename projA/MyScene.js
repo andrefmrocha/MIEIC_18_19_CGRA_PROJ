@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
         this.selectedDayState = 0;
         this.setDayState();
 
-        this.displayLamp = true;
+        this.displayLamp = false;
 
         this.textures = true;
 
@@ -231,20 +231,21 @@ class MyScene extends CGFscene {
         this.materialMineBottom.setTexture(this.textureMineBottom);
 
         this.materialOrange = new CGFappearance(this);
-        this.materialOrange.setAmbient(0.75/4, 0.45/4, 0, 1);
+        this.materialOrange.setAmbient(0.8/4, 0.45/4, 0, 1);
         this.materialOrange.setDiffuse(1, 0.6, 0, 1);
         this.materialOrange.setSpecular(0.2, 0.15, 0, 1);
         this.materialOrange.setShininess(10.0);
 
         this.materialApple = new CGFappearance(this);
-        this.materialApple.setAmbient(1/4, 0, 0, 1);
-        this.materialApple.setDiffuse(1, 0, 0, 1);
+        this.materialApple.setAmbient(1/8, 0, 0, 1);
+        this.materialApple.setDiffuse(1*0.8, 0, 0, 1);
         this.materialApple.setSpecular(0.25, 0, 0, 1);
         this.materialApple.setShininess(10.0);
 
         // Objects connected to MyInterface
 
-        this.forest = new MyTreeGroupPatch(this);
+        this.forest1 = new MyTreeGroupPatch(this,0);
+        this.forest2 = new MyTreeRowPatch(this,1);
         this.prism = new MyPrism(this, 3, 2, 3);
         this.cylinder = new MyCylinder(this, 50, 2, 3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
@@ -380,7 +381,13 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(2, 2, 2);
         this.translate(10, 0, -4);
-        this.forest.display();
+        this.forest1.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(2, 2, 2);
+        this.translate(0, 0, -12);
+        this.forest2.display();
         this.popMatrix();
 
         this.pushMatrix();
