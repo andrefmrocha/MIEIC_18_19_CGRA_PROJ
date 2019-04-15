@@ -374,9 +374,9 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         //this.forest.display();
-        //this.cenario();
+        this.cenario();
         //this.apple.display();
-        this.fire.display();
+        //this.fire.display();
 
         // ---- END Primitive drawing section
     }
