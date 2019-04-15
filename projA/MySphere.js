@@ -1,16 +1,17 @@
 
+/* eslint-disable no-undef */
 class MySphere extends CGFobject {
-    constructor(scene, complexity ) {
+    constructor (scene, complexity) {
         super(scene);
         this.complexity = complexity;
         this.initBuffers();
     }
-    initBuffers() {
+    initBuffers () {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
 
-        //this.texCoords = [];
+        // this.texCoords = [];
 
         this.t = (1.0 + Math.sqrt(5.0)) / 2.0;
 
@@ -61,61 +62,53 @@ class MySphere extends CGFobject {
         this.indices.push(8, 6, 7);
         this.indices.push(9, 8, 1);
 
+        for (let i = 0; i < this.complexity; i++) {
+            let faceCount = this.indices.length;
+            // console.log(this.indices.length/3);
+            // console.log(this.vertices.length/3);
+            for (let face = 0; face < faceCount; face += 3) {
+                let x1 = this.indices[face];
+                let y1 = this.indices[face + 1];
+                let z1 = this.indices[face + 2];
 
+                let x2 = this.vertices.length / 3;
+                this.addVertex((this.vertices[3 * x1] + this.vertices[3 * y1]) / 2, (this.vertices[3 * x1 + 1] + this.vertices[3 * y1 + 1]) / 2, (this.vertices[3 * x1 + 2] + this.vertices[3 * y1 + 2]) / 2);
 
-        for(var i = 0 ; i < this.complexity ; i++){
-          var faceCount = this.indices.length;
-          //console.log(this.indices.length/3);
-          //console.log(this.vertices.length/3);
-          for(var face = 0; face < faceCount; face+=3){
-            var x1 = this.indices[face];
-            var y1 = this.indices[face+1];
-            var z1 = this.indices[face+2];
+                let y2 = this.vertices.length / 3;
+                this.addVertex((this.vertices[3 * y1] + this.vertices[3 * z1]) / 2, (this.vertices[3 * y1 + 1] + this.vertices[3 * z1 + 1]) / 2, (this.vertices[3 * y1 + 2] + this.vertices[3 * z1 + 2]) / 2);
 
-            var x2 = this.vertices.length/3;
-            this.addVertex((this.vertices[3 * x1] + this.vertices[3 * y1])/2 , (this.vertices[3 * x1 + 1] + this.vertices[3 * y1 + 1])/2 , (this.vertices[3 * x1 + 2] + this.vertices[3 * y1 + 2])/2);
+                let z2 = this.vertices.length / 3;
+                this.addVertex((this.vertices[3 * z1] + this.vertices[3 * x1]) / 2, (this.vertices[3 * z1 + 1] + this.vertices[3 * x1 + 1]) / 2, (this.vertices[3 * z1 + 2] + this.vertices[3 * x1 + 2]) / 2);
 
-            var y2 = this.vertices.length/3;
-            this.addVertex((this.vertices[3 * y1] + this.vertices[3 * z1])/2 , (this.vertices[3 * y1 + 1] + this.vertices[3 * z1 + 1])/2 , (this.vertices[3 * y1 + 2] + this.vertices[3 * z1 + 2])/2);
+                // console.log(this.vertices.length/3);
 
-            var z2 = this.vertices.length/3;
-            this.addVertex((this.vertices[3 * z1] + this.vertices[3 * x1])/2 , (this.vertices[3 * z1 + 1] + this.vertices[3 * x1 + 1])/2 , (this.vertices[3 * z1 + 2] + this.vertices[3 * x1 + 2])/2);
+                this.addFace(x1, x2, z2);
+                this.addFace(y1, y2, x2);
+                this.addFace(z1, z2, y2);
+                this.addFace(x2, y2, z2);
+            }
 
-            //console.log(this.vertices.length/3);
-
-            this.addFace(x1, x2, z2);
-            this.addFace(y1, y2, x2);
-            this.addFace(z1, z2, y2);
-            this.addFace(x2, y2, z2);
-
-          }
-
-          this.indices.splice(0,faceCount);
-
-
-
+            this.indices.splice(0, faceCount);
         }
-
-
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
         this.initNormalVizBuffers();
     }
 
-    addFace(a,b,c){
-      //console.log(a,b,c);
-      this.indices.push(a,b,c);
+    addFace (a, b, c) {
+        // console.log(a,b,c);
+        this.indices.push(a, b, c);
     }
 
-    addVertex(x,y,z){
-      var length = Math.sqrt( (x*x + y*y + z*z)/(this.t*this.t +1) );
-      //console.log(length);
-      this.vertices.push(x/length,y/length,z/length);
-      this.normals.push(x/length,y/length,z/length);
+    addVertex (x, y, z) {
+        let length = Math.sqrt((x * x + y * y + z * z) / (this.t * this.t + 1));
+        // console.log(length);
+        this.vertices.push(x / length, y / length, z / length);
+        this.normals.push(x / length, y / length, z / length);
     }
 
-    updateBuffers(complexity){
+    updateBuffers (complexity) {
         this.initBuffers();
         this.initNormalVizBuffers();
     }

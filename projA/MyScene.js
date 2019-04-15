@@ -1,46 +1,46 @@
+/* eslint-disable no-undef */
 /**
 * MyScene
 * @constructor
 */
 class MyScene extends CGFscene {
-    constructor() {
+    constructor () {
         super();
         this.time = 0;
     }
-    init(application) {
+    init (application) {
         super.init(application);
         this.initCameras();
         this.initLights();
 
-        //Background color
+        // Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
         this.gl.clearDepth(100.0);
-        //this.gl.enable(this.gl.DEPTH_TEST);
+        // this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
-        //this.gl.disable(this.gl.DEPTH_TEST);
+        // this.gl.disable(this.gl.DEPTH_TEST);
 
-        this.enableTextures(true);
-
-        //Initialize scene objects
+        // Initialize scene objects
         this.axis = new CGFaxis(this);
 
-
-        //Object controllers
+        // Object controllers
         this.displayAxis = true;
         this.objectComplexity = 0.5;
         this.displayNormals = false;
 
         this.setUpdatePeriod(1000 / 30);
-        this.dayStates = {'Day' : 0 , 'Night' : 1};
+        this.dayStates = { 'Day': 0, 'Night': 1 };
         this.selectedDayState = 0;
         this.setDayState();
 
         this.displayLamp = true;
 
+        this.textures = true;
+
         // Textures
-        //this.wood = new CGFtexture(this, 'images/wood.jpg');
+        // this.wood = new CGFtexture(this, 'images/wood.jpg');
 
         this.materialDiffuse = new CGFappearance(this);
         this.materialDiffuse.setAmbient(0.1, 0.1, 0.1, 1);
@@ -144,14 +144,12 @@ class MyScene extends CGFscene {
         this.floorTile.setShininess(10.0);
         this.floorTile.loadTexture('images/mineTop.png');
 
-
         this.garage = new CGFappearance(this);
         this.garage.setAmbient(0.1, 0.1, 0.1, 1);
         this.garage.setDiffuse(0.3, 0.3, 0.3, 1);
         this.garage.setSpecular(0.9, 0.9, 0.9, 1);
         this.garage.setShininess(10.0);
         this.garage.loadTexture('images/garage.jpg');
-
 
         this.materialMineSide = new CGFappearance(this);
         this.materialMineSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -160,7 +158,7 @@ class MyScene extends CGFscene {
         this.materialMineSide.setShininess(10.0);
         this.materialMineSide.setTexture(this.textureMineSide);
 
-        //-------
+        // -------
 
         this.materialMineTop = new CGFappearance(this);
         this.materialMineTop.setAmbient(0.1, 0.1, 0.1, 1);
@@ -168,8 +166,16 @@ class MyScene extends CGFscene {
         this.materialMineTop.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialMineTop.setShininess(10.0);
         this.materialMineTop.setTexture(this.textureMineTop);
+        // -------
 
-        //-------
+        this.rockMaterial = new CGFappearance(this);
+        this.rockMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rockMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rockMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rockMaterial.setShininess(10.0);
+        this.rockMaterial.loadTexture('images/rock.jpg');
+
+        // -------
         this.materialMineBottom = new CGFappearance(this);
         this.materialMineBottom.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialMineBottom.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -178,177 +184,167 @@ class MyScene extends CGFscene {
         this.materialMineBottom.setTexture(this.textureMineBottom);
 
         this.materialOrange = new CGFappearance(this);
-        this.materialOrange.setAmbient(0.75,0.45,0, 1);
-        this.materialOrange.setDiffuse(0.5,0.3,0, 1);
-        this.materialOrange.setSpecular(0.125,0.075,0, 1);
+        this.materialOrange.setAmbient(0.75, 0.45, 0, 1);
+        this.materialOrange.setDiffuse(0.5, 0.3, 0, 1);
+        this.materialOrange.setSpecular(0.125, 0.075, 0, 1);
         this.materialOrange.setShininess(10.0);
 
         this.materialApple = new CGFappearance(this);
-        this.materialApple.setAmbient(1,0,0, 1);
-        this.materialApple.setDiffuse(1,0,0, 1);
-        this.materialApple.setSpecular(0.25,0,0, 1);
+        this.materialApple.setAmbient(1, 0, 0, 1);
+        this.materialApple.setDiffuse(1, 0, 0, 1);
+        this.materialApple.setSpecular(0.25, 0, 0, 1);
         this.materialApple.setShininess(10.0);
 
-
-        //Objects connected to MyInterface
+        // Objects connected to MyInterface
 
         this.forest = new MyTreeGroupPatch(this);
-        this.prism = new MyPrism(this,3,2,3);
-        this.cylinder = new MyCylinder(this,50,2,3);
+        this.prism = new MyPrism(this, 3, 2, 3);
+        this.cylinder = new MyCylinder(this, 50, 2, 3);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
-        this.hill = new MyVoxelHill(this, 5);
+        this.greenHill = new MyVoxelHill(this, 5, this.materialMineTop);
+        this.rockHill = new MyVoxelHill(this, 10, this.rockMaterial);
         this.pool = new MyPool(this, 4, 10);
-        this.cubemap = new MyCubeMap(this,50);
+        this.cubemap = new MyCubeMap(this, 50);
         this.floor = new MyFloor(this, 10, 10);
-        this.apple = new MyApple(this,3);
+        this.apple = new MyApple(this, 3);
 
-        //this.sphere = new MySphere(this,3);
-        this.circle = new MyCircle(this,10);
+        // this.sphere = new MySphere(this,3);
+        this.circle = new MyCircle(this, 10);
 
-        this.lamp = new MyLamp(this,0.2);
+        this.lamp = new MyLamp(this, 0.2);
         this.fire = new MyFirePit(this);
-
     }
-    initLights() {
-      /*  this.lights[0].setPosition(15, 2, 5, 1);
+    initLights () {
+        /*  this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].setVisible();
-        this.lights[0].update();*/
+        this.lights[0].update(); */
     }
-    updateObjectComplexity(){
-        this.cylinder.updateBuffers(this.objectComplexity);
-    }
-
-    update(currTime){
-
-        var delta = currTime - this.time;
+    update (currTime) {
+        let delta = currTime - this.time;
         this.time = currTime;
 
-        if(this.gui.isKeyPressed("KeyO")){
+        if (this.gui.isKeyPressed('KeyO')) {
             this.openGarage(delta);
-        } else if (this.gui.isKeyPressed("KeyP")){
+        } else if (this.gui.isKeyPressed('KeyP')) {
             this.closeGarage(delta);
         }
 
-        if(this.house.doorOpening === true){
+        if (this.house.doorOpening === true) {
             this.house.update(delta);
-        } else if(this.house.doorClosing === true){
+        } else if (this.house.doorClosing === true) {
             this.house.update(delta);
         }
     }
 
-    openGarage(delta){
-        console.log("Open the door!", delta);
-        if(this.house.doorOpening === false)
-        {
+    openGarage (delta) {
+        console.log('Open the door!', delta);
+        if (this.house.doorOpening === false) {
             // this.house.garageY = -1;
             this.house.openDoor();
         }
     }
 
-    closeGarage(delta){
-        console.log("Close the door!", delta);
-        if(this.house.doorClosing === false)
-            this.house.closeDoor();
+    closeGarage (delta) {
+        console.log('Close the door!', delta);
+        if (this.house.doorClosing === false) { this.house.closeDoor(); }
     }
 
-
-
-    initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+    initCameras () {
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-15, 5, 15), vec3.fromValues(5, 0, 0));
     }
-    setDefaultAppearance() {
+    setDefaultAppearance () {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
 
-    setDayState(){
-      if(this.selectedDayState == 0){
-        this.lights[0].setPosition(0,25,0,1);
-        this.lights[0].setAmbient(1.0, 1, 0.8, 1.0);
-        this.lights[0].setDiffuse(1.0, 1, 1, 1.0);
-        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setConstantAttenuation(1.2);
-        this.lights[0].enable();
-        this.lights[0].setVisible(true);
-        this.lights[0].update();
-
-      }else if (this.selectedDayState == 1) {
-
-        this.lights[0].setPosition(0,25,0,1);
-        this.lights[0].setAmbient(1, 1, 1, 1.0);
-        this.lights[0].setDiffuse(0.6, 0.6, 0.8, 1.0);
-        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setConstantAttenuation(1.5);
-        this.lights[0].enable();
-        this.lights[0].setVisible(true);
-        this.lights[0].update();
-
-      }
-    }
-
-    cenario(){
-      this.lights[0].update();
-
-      this.pushMatrix();
-      this.translate(-25,0,-15);
-      for(var x = -25; x < 25 ; x+=10){
-        for(var y = -25; y < 25 ; y+=10){
-          this.floor.display();
-          this.translate(10,0,0);
+    setDayState () {
+        // eslint-disable-next-line eqeqeq
+        if (this.selectedDayState == this.dayStates['Day']) {
+            this.lights[0].setPosition(0, 25, 0, 1);
+            this.lights[0].setAmbient(1.0, 1, 0.8, 1.0);
+            this.lights[0].setDiffuse(1.0, 1, 1, 1.0);
+            this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+            this.lights[0].setConstantAttenuation(1.2);
+            this.lights[0].enable();
+            this.lights[0].setVisible(true);
+            this.lights[0].update();
+        // eslint-disable-next-line eqeqeq
+        } else if (this.selectedDayState == this.dayStates['Night']) {
+            this.lights[0].setPosition(0, 25, 0, 1);
+            this.lights[0].setAmbient(1, 1, 1, 1.0);
+            this.lights[0].setDiffuse(0.6, 0.6, 0.8, 1.0);
+            this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+            this.lights[0].setConstantAttenuation(1.5);
+            this.lights[0].enable();
+            this.lights[0].setVisible(true);
+            this.lights[0].update();
         }
-        this.translate(-50,0,10);
-      }
-      this.popMatrix()
-
-      if(this.displayLamp){
-        this.lamp.enable();
-      }else{
-        this.lamp.disable();
-      }
-
-      this.pushMatrix();
-      this.translate(-2,1,4);
-      this.lamp.display();
-      this.popMatrix();
-
-
-       this.cubemap.display();
-
-
-      //this.prism.display();
-
-
-
-      this.scale(0.35, 0.35, 0.35);
-      //this.floor.display();
-
-      this.pushMatrix();
-      this.scale(2,2,2);
-      this.translate(10,0,-4);
-      this.forest.display();
-      this.popMatrix();
-
-      this.pushMatrix();
-      this.translate(4,0,-3);
-      this.house.display();
-      this.popMatrix();
-
-       this.pushMatrix();
-       this.translate(-5,0,-8);
-       this.hill.display();
-       this.popMatrix();
-
-       this.pushMatrix();
-       this.translate(-4,0,2);
-       this.pool.display();
-       this.popMatrix();
     }
 
-    display() {
+    cenario () {
+        this.lights[0].update();
+
+        this.pushMatrix();
+        this.translate(-25, 0, -15);
+        for (let x = -25; x < 25; x += 10) {
+            for (let y = -25; y < 25; y += 10) {
+                this.floor.display();
+                this.translate(10, 0, 0);
+            }
+            this.translate(-50, 0, 10);
+        }
+        this.popMatrix();
+
+        if (this.displayLamp) {
+            this.lamp.enable();
+        } else {
+            this.lamp.disable();
+        }
+
+        this.pushMatrix();
+        this.translate(-2, 1, 4);
+        this.lamp.display();
+        this.popMatrix();
+
+        this.cubemap.display();
+
+        // this.prism.display();
+
+        this.scale(0.35, 0.35, 0.35);
+        this.floor.display();
+
+        this.pushMatrix();
+        this.scale(2, 2, 2);
+        this.translate(10, 0, -4);
+        this.forest.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(4, 0, -3);
+        this.house.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-5, 0, -8);
+        this.greenHill.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(45, 0, -40);
+        this.rockHill.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-4, 0.2, 2);
+        this.pool.display();
+        this.popMatrix();
+    }
+
+    display () {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -358,17 +354,17 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        this.enableTextures(this.textures);
 
         // Draw axis
-        if(this.displayAxis)
-            this.axis.display();
-/*
+        if (this.displayAxis) { this.axis.display(); }
+        /*
         if(this.displayNormals)
             this.cylinder.enableNormalViz();
         else
             this.cylinder.disableNormalViz();
 */
-        //Apply default appearance
+        // Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
