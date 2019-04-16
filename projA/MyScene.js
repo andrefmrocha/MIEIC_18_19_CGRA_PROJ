@@ -236,6 +236,13 @@ class MyScene extends CGFscene {
         this.materialApple.setSpecular(0.25, 0, 0, 1);
         this.materialApple.setShininess(10.0);
 
+        this.fireMaterial = new CGFappearance(this);
+        this.fireMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.fireMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.fireMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.fireMaterial.setShininess(10.0);
+        this.fireMaterial.loadTexture('images/fire.jpg');
+
         // Objects connected to MyInterface
 
         this.forest1 = new MyTreeGroupPatch(this, 0);
@@ -334,7 +341,7 @@ class MyScene extends CGFscene {
         }
         this.popMatrix();
 
-        if (this.displayLamp) {
+        /*if (this.displayLamp) {
             this.lamp.enable();
         } else {
             this.lamp.disable();
@@ -343,7 +350,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(-2, 1, 4);
         this.lamp.display();
-        this.popMatrix();
+        this.popMatrix();*/
 
         if (this.selectedDayState == 0)
             {this.cubemapday.display(); }
@@ -351,7 +358,7 @@ class MyScene extends CGFscene {
 
 
         this.scale(0.35, 0.35, 0.35);
-        this.floor.display();
+        //this.floor.display();
 
         this.pushMatrix();
         this.scale(2, 2, 2);
@@ -384,6 +391,10 @@ class MyScene extends CGFscene {
         this.translate(-4, 0.2, 2);
         this.pool.display();
         this.popMatrix();
+
+        this.pushMatrix();
+        this.fire.display();
+        this.popMatrix();
     }
 
     display () {
@@ -406,6 +417,7 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         this.cenario();
+        //this.fire.display();
 
         // ---- END Primitive drawing section
     }
