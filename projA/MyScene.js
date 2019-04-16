@@ -11,7 +11,6 @@ class MyScene extends CGFscene {
     init (application) {
         super.init(application);
         this.initCameras();
-        this.initLights();
 
         // Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -31,7 +30,7 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
 
         this.setUpdatePeriod(1000 / 30);
-        this.dayStates = { 'Day': 0, 'Night1': 1  , 'Night2' : 2 };
+        this.dayStates = { 'Day': 0, 'Night': 1 };
         this.selectedDayState = 0;
         this.setDayState();
 
@@ -107,11 +106,6 @@ class MyScene extends CGFscene {
         this.materialHillsDn.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialHillsDn.setShininess(10.0);
         this.materialHillsDn.loadTexture('images/skybox/hills_dn.jpg');
-
-
-
-
-
 
         this.materialNightBk = new CGFappearance(this);
         this.materialNightBk.setAmbient(0.1, 0.1, 0.1, 1);
@@ -231,23 +225,21 @@ class MyScene extends CGFscene {
         this.materialMineBottom.setTexture(this.textureMineBottom);
 
         this.materialOrange = new CGFappearance(this);
-        this.materialOrange.setAmbient(0.8/4, 0.45/4, 0, 1);
+        this.materialOrange.setAmbient(0.8 / 4, 0.45 / 4, 0, 1);
         this.materialOrange.setDiffuse(1, 0.6, 0, 1);
         this.materialOrange.setSpecular(0.2, 0.15, 0, 1);
         this.materialOrange.setShininess(10.0);
 
         this.materialApple = new CGFappearance(this);
-        this.materialApple.setAmbient(1/8, 0, 0, 1);
-        this.materialApple.setDiffuse(1*0.8, 0, 0, 1);
+        this.materialApple.setAmbient(1 / 8, 0, 0, 1);
+        this.materialApple.setDiffuse(1 * 0.8, 0, 0, 1);
         this.materialApple.setSpecular(0.25, 0, 0, 1);
         this.materialApple.setShininess(10.0);
 
         // Objects connected to MyInterface
 
-        this.forest1 = new MyTreeGroupPatch(this,0);
-        this.forest2 = new MyTreeRowPatch(this,1);
-        this.prism = new MyPrism(this, 3, 2, 3);
-        this.cylinder = new MyCylinder(this, 50, 2, 3);
+        this.forest1 = new MyTreeGroupPatch(this, 0);
+        this.forest2 = new MyTreeRowPatch(this, 1);
         this.house = new MyHouse(this, this.brick, this.door, this.tiles);
         this.greenHill = new MyVoxelHill(this, 5, this.materialMineTop);
         this.rockHill = new MyVoxelHill(this, 10, this.rockMaterial);
@@ -255,20 +247,8 @@ class MyScene extends CGFscene {
         this.cubemapday = new MyCubeMapDay(this, 50);
         this.cubemapnight = new MyCubeMapNight(this, 50);
         this.floor = new MyFloor(this, 10, 10);
-        this.apple = new MyApple(this, 3);
-
-        // this.sphere = new MySphere(this,3);
-        this.circle = new MyCircle(this, 10);
-
         this.lamp = new MyLamp(this, 0.2);
         this.fire = new MyFirePit(this);
-    }
-    initLights () {
-        /*  this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].enable();
-        this.lights[0].setVisible();
-        this.lights[0].update(); */
     }
     update (currTime) {
         let delta = currTime - this.time;
@@ -301,7 +281,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras () {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-15, 5, 15), vec3.fromValues(5, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-15, 5, 15), vec3.fromValues(3, 0, 0));
     }
     setDefaultAppearance () {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -319,28 +299,25 @@ class MyScene extends CGFscene {
             this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
             this.lights[0].setConstantAttenuation(1.2);
             this.lights[0].enable();
-            //this.lights[0].setVisible(true);
-            this.lights[0].update();
+            this.lights[2].disable();
         // eslint-disable-next-line eqeqeq
-      } else if (this.selectedDayState == this.dayStates['Night1']) {
+        } else if (this.selectedDayState == this.dayStates['Night']) {
             this.lights[0].setPosition(0, 25, 0, 1);
             this.lights[0].setAmbient(1, 1, 1, 1.0);
             this.lights[0].setDiffuse(0.6, 0.6, 0.8, 1.0);
             this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
             this.lights[0].setConstantAttenuation(1.5);
             this.lights[0].enable();
-            //this.lights[0].setVisible(true);
             this.lights[0].update();
-        }else if (this.selectedDayState == this.dayStates['Night2']) {
-            this.lights[0].setPosition(0, 0.5, 0, 1);
-            this.lights[0].setAmbient(0.98*0.8, 0.8 * 0.8, 0.5*0.8, 1.0);
-            this.lights[0].setDiffuse(0.98, 0.7, 0.5, 1.0);
-            this.lights[0].setSpecular(0.98/4, 0.7/4, 0.5/4, 1.0);
-            this.lights[0].setConstantAttenuation(1);
-            this.lights[0].enable();
-            //this.lights[0].setVisible(true);
-            this.lights[0].update();
+            this.lights[2].setPosition(0, 0.5, 0, 1);
+            this.lights[2].setAmbient(0.98 * 0.8, 0.8 * 0.8, 0.5 * 0.8, 1.0);
+            this.lights[2].setDiffuse(0.98, 0.7, 0.5, 1.0);
+            this.lights[2].setSpecular(0.98 / 4, 0.7 / 4, 0.5 / 4, 1.0);
+            this.lights[2].setConstantAttenuation(1);
+            this.lights[2].enable();
         }
+        this.lights[0].update();
+        this.lights[2].update();
     }
 
     cenario () {
@@ -368,12 +345,10 @@ class MyScene extends CGFscene {
         this.lamp.display();
         this.popMatrix();
 
-        if(this.selectedDayState == 0)
-          this.cubemapday.display();
+        if (this.selectedDayState == 0)
+            {this.cubemapday.display(); }
         else this.cubemapnight.display();
 
-
-        // this.prism.display();
 
         this.scale(0.35, 0.35, 0.35);
         this.floor.display();
@@ -425,21 +400,12 @@ class MyScene extends CGFscene {
 
         // Draw axis
         if (this.displayAxis) { this.axis.display(); }
-        /*
-        if(this.displayNormals)
-            this.cylinder.enableNormalViz();
-        else
-            this.cylinder.disableNormalViz();
-*/
         // Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-        //this.forest.display();
         this.cenario();
-        //this.apple.display();
-        //this.fire.display();
 
         // ---- END Primitive drawing section
     }
