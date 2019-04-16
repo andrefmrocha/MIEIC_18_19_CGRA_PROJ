@@ -28,8 +28,6 @@ class MyInterface extends CGFinterface {
             .add(this.scene, 'textures')
             .name('Enable Textures');
 
-        this.gui.add(this.scene, 'displayLamp').name('Lamp');
-
         return true;
     }
     initKeys () {

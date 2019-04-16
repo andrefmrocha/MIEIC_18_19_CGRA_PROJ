@@ -34,8 +34,6 @@ class MyScene extends CGFscene {
         this.selectedDayState = 0;
         this.setDayState();
 
-        this.displayLamp = false;
-
         this.textures = true;
 
         // Textures
@@ -341,16 +339,6 @@ class MyScene extends CGFscene {
         }
         this.popMatrix();
 
-        /*if (this.displayLamp) {
-            this.lamp.enable();
-        } else {
-            this.lamp.disable();
-        }
-
-        this.pushMatrix();
-        this.translate(-2, 1, 4);
-        this.lamp.display();
-        this.popMatrix();*/
 
         if (this.selectedDayState == 0)
             {this.cubemapday.display(); }
@@ -358,7 +346,6 @@ class MyScene extends CGFscene {
 
 
         this.scale(0.35, 0.35, 0.35);
-        //this.floor.display();
 
         this.pushMatrix();
         this.scale(2, 2, 2);
@@ -417,7 +404,6 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         this.cenario();
-        //this.fire.display();
 
         // ---- END Primitive drawing section
     }
